@@ -6,7 +6,6 @@ import { useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import LoadingScreen from "@/components/LoadingScreen";
 import Hero from "@/components/Hero";
-import MusicPlayer from "@/components/MusicPlayer";
 
 const PetalAnimation = dynamic(() => import("@/components/PetalAnimation"), {
   ssr: false,
@@ -40,7 +39,6 @@ function InvitationContent() {
       {isLoaded && (
         <main className="relative">
           <PetalAnimation />
-          <MusicPlayer />
           <Hero guestName={displayName} relation={relation} />
           <ParentsInfo />
           <OurStory />

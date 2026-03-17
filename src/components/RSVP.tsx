@@ -2,28 +2,164 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FaHeart, FaCheck, FaUser, FaPhone } from "react-icons/fa";
 import ScrollAnimation from "./ScrollAnimation";
 import SectionDivider from "./SectionDivider";
 
+type Attending = "yes" | "no" | "";
+
+type SubmitFx = "none" | "yes" | "no";
+
+function FireworksOverlay() {
+  const particles = Array.from({ length: 28 }).map((_, i) => i);
+  return (
+    <motion.div
+      className="fixed inset-0 z-[200] pointer-events-none"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+    >
+      {/* Burst center */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-white/10" />
+      {particles.map((i) => {
+        const angle = (i / particles.length) * Math.PI * 2;
+        const distance = 120 + (i % 7) * 18;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        const colors = ["#b91c1c", "#f472b6", "#fb7185", "#f59e0b", "#ec4899"];
+        return (
+          <motion.span
+            key={i}
+            className="absolute left-1/2 top-[35%] w-2 h-2 rounded-full"
+            style={{ backgroundColor: colors[i % colors.length] }}
+            initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+            animate={{
+              x,
+              y,
+              scale: [0, 1.2, 0.8],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 1.1,
+              ease: "easeOut",
+              delay: 0.05 + (i % 6) * 0.015,
+            }}
+          />
+        );
+      })}
+      <motion.div
+        className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 text-5xl"
+        initial={{ scale: 0.6, opacity: 0 }}
+        animate={{ scale: [0.6, 1.1, 1], opacity: [0, 1, 0] }}
+        transition={{ duration: 1.1, ease: "easeOut" }}
+      >
+        🎆
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function SadOverlay() {
+  return (
+    <motion.div
+      className="fixed inset-0 z-[200] pointer-events-none flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.35 }}
+    >
+      <motion.div
+        className="text-center"
+        initial={{ scale: 0.7, y: 10, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 220, damping: 18 }}
+      >
+        <motion.div
+          className="text-7xl"
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 0.8, repeat: 2 }}
+        >
+          😢
+        </motion.div>
+        <motion.p
+          className="mt-3 text-sm text-wedding-red/70"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1 }}
+        >
+          Hẹn gặp bạn dịp gần nhất nhé
+        </motion.p>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function RSVP() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    attending: "",
+    attending: "" as Attending,
     message: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitFx, setSubmitFx] = useState<SubmitFx>("none");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: integrate with backend/API
-    console.log("RSVP submitted:", formData);
-    setIsSubmitted(true);
+    if (isSubmitting) return;
+    setSubmitError(null);
+
+    try {
+      setIsSubmitting(true);
+      const res = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          pageUrl: typeof window !== "undefined" ? window.location.href : "",
+        }),
+      });
+
+      if (!res.ok) {
+        setSubmitError("Gửi thất bại. Vui lòng thử lại.");
+        return;
+      }
+
+      const fx: SubmitFx = formData.attending === "yes" ? "yes" : "no";
+      setSubmitFx(fx);
+      setIsSubmitted(true);
+
+      const relation = searchParams.get("relation") || "";
+      const target = `/rsvp-card?name=${encodeURIComponent(
+        formData.name.trim()
+      )}&relation=${encodeURIComponent(relation)}&attending=${encodeURIComponent(
+        formData.attending
+      )}`;
+
+      window.setTimeout(() => {
+        router.push(target);
+      }, fx === "yes" ? 1200 : 1400);
+    } catch {
+      setSubmitError("Không thể kết nối. Vui lòng thử lại.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section className="section-container gradient-bg" id="rsvp">
+      <AnimatePresence>
+        {submitFx === "yes" && <FireworksOverlay />}
+        {submitFx === "no" && <SadOverlay />}
+      </AnimatePresence>
+
       <ScrollAnimation>
         <SectionDivider />
         <h2 className="section-title">Xác Nhận Tham Dự</h2>
@@ -85,10 +221,10 @@ export default function RSVP() {
                     Bạn có tham dự không?
                   </p>
                   <div className="grid grid-cols-2 gap-3">
-                    {[
-                      { value: "yes", label: "Sẽ tham dự", icon: "🎉" },
-                      { value: "no", label: "Không thể đến", icon: "😢" },
-                    ].map((option) => (
+                      {[
+                        { value: "yes" as const, label: "Sẽ tham dự", icon: "🎉" },
+                        { value: "no" as const, label: "Không thể đến", icon: "😢" },
+                      ].map((option) => (
                       <motion.button
                         key={option.value}
                         type="button"
@@ -131,8 +267,14 @@ export default function RSVP() {
                   disabled={!formData.name || !formData.phone || !formData.attending}
                 >
                   <FaHeart className="text-sm" />
-                  Gửi xác nhận
+                  {isSubmitting ? "Đang gửi..." : "Gửi xác nhận"}
                 </motion.button>
+
+                {submitError && (
+                  <p className="text-center text-sm text-red-600">
+                    {submitError}
+                  </p>
+                )}
               </form>
             </motion.div>
           ) : (

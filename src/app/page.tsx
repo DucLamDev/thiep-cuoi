@@ -4,7 +4,6 @@ import { useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import LoadingScreen from "@/components/LoadingScreen";
 import Hero from "@/components/Hero";
-import MusicPlayer from "@/components/MusicPlayer";
 
 const PetalAnimation = dynamic(() => import("@/components/PetalAnimation"), {
   ssr: false,
@@ -31,7 +30,6 @@ export default function Home() {
       {isLoaded && (
         <main className="relative">
           <PetalAnimation />
-          <MusicPlayer />
           <Hero />
           <ParentsInfo />
           <OurStory />

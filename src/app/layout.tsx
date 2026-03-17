@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
+import MusicPlayer from "@/components/MusicPlayer";
+import MotionProvider from "@/components/MotionProvider";
 
 const playfair = Playfair_Display({
   subsets: ["latin", "vietnamese"],
@@ -38,7 +40,10 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${poppins.variable} font-poppins antialiased bg-wedding-cream`}
       >
-        {children}
+        <MotionProvider>
+          <MusicPlayer />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );
