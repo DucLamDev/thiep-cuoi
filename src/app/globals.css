@@ -3,25 +3,77 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fef7f0;
+  --foreground: #1a1a1a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fce7f3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b91c1c;
+  border-radius: 4px;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply min-h-screen w-full flex flex-col items-center justify-center px-4 py-16 md:py-20 relative overflow-hidden;
+  }
+
+  .section-title {
+    @apply font-playfair text-3xl md:text-5xl text-wedding-red text-center mb-8 md:mb-12;
+  }
+
+  .wedding-card {
+    @apply bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-wedding-pink p-6 md:p-8;
+  }
+
+  .wedding-btn {
+    @apply bg-wedding-red text-white font-poppins font-medium px-8 py-4 rounded-full text-lg
+    hover:bg-wedding-red-dark transition-all duration-300 active:scale-95 shadow-lg;
+  }
+
+  .wedding-btn-outline {
+    @apply border-2 border-wedding-red text-wedding-red font-poppins font-medium px-8 py-4 rounded-full text-lg
+    hover:bg-wedding-red hover:text-white transition-all duration-300 active:scale-95;
+  }
+
+  .gradient-bg {
+    background: linear-gradient(135deg, #fef7f0 0%, #fce7f3 50%, #fdf2f8 100%);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(180deg, #fdf2f8 0%, #fce7f3 30%, #fef7f0 60%, #fff 100%);
   }
 }
