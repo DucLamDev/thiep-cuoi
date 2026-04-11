@@ -66,10 +66,10 @@ export default function ParentsInfo() {
             </div>
             <div className="space-y-2 text-center">
               <p className="text-gray-700 font-medium">
-                Bố: Nguyễn Thành Phương
+                Ông: Nguyễn Thành Phương
               </p>
               <p className="text-gray-700 font-medium">
-                Mẹ: Trần Thị Hương
+                Bà: Trần Thị Hương
               </p>
               <p className="text-gray-700 font-medium">
                 Cô dâu: Nguyễn Thị Hiền Na (Thứ nữ)
