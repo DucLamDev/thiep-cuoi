@@ -2,8 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { FaHeart, FaCoffee, FaRing } from "react-icons/fa";
-import { GiDiamondRing } from "react-icons/gi";
+import { IoHeart, IoCafe, IoGift } from "react-icons/io5";
 import ScrollAnimation from "./ScrollAnimation";
 import SectionDivider from "./SectionDivider";
 
@@ -13,7 +12,7 @@ const timeline = [
     title: "Lần Đầu Gặp Nhau",
     description:
       "Chúng tôi gặp nhau lần đầu tại một buổi họp mặt bạn bè. Ánh mắt đầu tiên đã nói lên tất cả.",
-    icon: FaHeart,
+    icon: IoHeart,
     side: "left",
   },
   {
@@ -21,7 +20,7 @@ const timeline = [
     title: "Lần Đầu Hẹn Hò",
     description:
       "Buổi hẹn hò đầu tiên tại quán cà phê nhỏ. Chúng tôi nói chuyện đến khi quán đóng cửa.",
-    icon: FaCoffee,
+    icon: IoCafe,
     side: "right",
   },
   {
@@ -29,7 +28,7 @@ const timeline = [
     title: "Lời Cầu Hôn",
     description:
       'Dưới ánh hoàng hôn tuyệt đẹp, anh quỳ gối và nói: "Em có muốn làm vợ anh không?"',
-    icon: GiDiamondRing,
+    icon: IoGift,
     side: "left",
   },
   {
@@ -37,7 +36,7 @@ const timeline = [
     title: "Ngày Trọng Đại",
     description:
       "Và bây giờ, chúng tôi sẵn sàng bước vào chương mới của cuộc đời - cùng nhau mãi mãi.",
-    icon: FaRing,
+    icon: IoGift,
     side: "right",
     isFinal: true,
   },
@@ -280,7 +279,7 @@ export default function OurStory() {
                         ease: "easeOut",
                       }}
                     >
-                      <FaHeart className="text-wedding-red text-sm" />
+                      <IoHeart className="text-wedding-red text-sm" />
                     </motion.div>
                   ))}
                 </div>
@@ -328,7 +327,7 @@ export default function OurStory() {
                   delay: i * 0.3,
                 }}
               >
-                <FaHeart className="text-wedding-red/40 text-sm" />
+                <IoHeart className="text-wedding-red/40 text-sm" />
               </motion.div>
             ))}
           </div>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác nhận tham dự - Đám cưới Đình Quân & Hiền Na</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #ffffff 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(185, 28, 28, 0.15);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '💕';
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            top: -20px;
+            right: -20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            color: #fce7f3;
+            font-size: 14px;
+            font-weight: 300;
+        }
+        
+        .couple-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .content {
+            padding: 30px 25px;
+        }
+        
+        .notification-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #fef3f2 0%, #ffffff 100%);
+            border-left: 4px solid #b91c1c;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #fce7f3;
+        }
+        
+        .info-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #b91c1c;
+            min-width: 120px;
+            font-size: 14px;
+        }
+        
+        .info-value {
+            color: #374151;
+            font-size: 14px;
+            flex: 1;
+            word-break: break-word;
+        }
+        
+        .status-attending {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        .status-not-attending {
+            display: inline-block;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        .message-box {
+            background: #f9fafb;
+            border: 2px dashed #d1d5db;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-style: italic;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .footer {
+            background: #f9fafb;
+            padding: 25px;
+            text-align: center;
+            border-top: 3px solid #fce7f3;
+        }
+        
+        .footer-hearts {
+            font-size: 24px;
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+        }
+        
+        .footer p {
+            color: #6b7280;
+            font-size: 13px;
+            margin: 5px 0;
+        }
+        
+        .footer a {
+            color: #b91c1c;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fce7f3, transparent);
+            margin: 20px 0;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .info-row {
+                flex-direction: column;
+            }
+            
+            .info-label {
+                margin-bottom: 5px;
+                min-width: auto;
+            }
+            
+            .couple-photo {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎊 Xác Nhận Tham Dự 🎊</h1>
+            <p>Đám cưới Đình Quân & Hiền Na</p>
+        </div>
+        
+        <!-- Couple Photo -->
+        <img src="https://i.imgur.com/placeholder.jpg" alt="Đình Quân & Hiền Na" class="couple-photo">
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="notification-badge">
+                ✉️ Thông báo mới
+            </div>
+            
+            <h2 style="color: #1f2937; font-size: 20px; margin-bottom: 15px;">
+                Bạn có phản hồi mới từ khách mời!
+            </h2>
+            
+            <div class="divider"></div>
+            
+            <!-- Guest Info Card -->
+            <div class="info-card">
+                <div class="info-row">
+                    <span class="info-label">👤 Họ và tên:</span>
+                    <span class="info-value"><strong>{{from_name}}</strong></span>
+                </div>
+                
+                <div class="info-row">
+                    <span class="info-label">📱 Số điện thoại:</span>
+                    <span class="info-value">{{phone}}</span>
+                </div>
+                
+                <div class="info-row">
+                    <span class="info-label">🎉 Trạng thái:</span>
+                    <span class="info-value">
+                        <span class="status-attending">{{attending}}</span>
+                    </span>
+                </div>
+                
+                <div class="info-row">
+                    <span class="info-label">🔗 Trang thiệp:</span>
+                    <span class="info-value">
+                        <a href="{{page_url}}" style="color: #b91c1c; word-break: break-all;">
+                            Xem thiệp cưới
+                        </a>
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Message Box -->
+            <div class="message-box">
+                <strong style="color: #374151; display: block; margin-bottom: 8px;">💌 Lời nhắn:</strong>
+                {{message}}
+            </div>
+            
+            <div class="divider"></div>
+            
+            <p style="text-align: center; color: #6b7280; font-size: 13px; margin-top: 20px;">
+                Email này được gửi tự động từ website thiệp cưới<br>
+                <strong style="color: #b91c1c;">Đình Quân & Hiền Na</strong>
+            </p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-hearts">💕 💐 💕</div>
+            <p><strong>Ngày cưới: 02 Tháng 05, 2026</strong></p>
+            <p>Thôn Vĩnh Thạnh, Xã Hoà Trí, Ninh Hoà, Khánh Hoà</p>
+            <p style="margin-top: 15px;">
+                <a href="{{page_url}}">🌐 Xem thiệp cưới online</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

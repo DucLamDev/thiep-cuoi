@@ -2,12 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import {
-  FaFacebook,
-  FaLink,
-  FaCheck,
-  FaComment,
-} from "react-icons/fa";
+import { IoLogoFacebook, IoChatbubbles, IoLink, IoCheckmark } from "react-icons/io5";
 import { SiZalo } from "react-icons/si";
 import ScrollAnimation from "./ScrollAnimation";
 import SectionDivider from "./SectionDivider";
@@ -37,13 +32,13 @@ export default function ShareInvitation() {
   const shareLinks = [
     {
       name: "Facebook",
-      icon: <FaFacebook className="text-xl" />,
+      icon: <IoLogoFacebook className="text-xl" />,
       color: "bg-[#1877F2]",
       url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
     },
     {
       name: "Messenger",
-      icon: <FaComment className="text-xl" />,
+      icon: <IoChatbubbles className="text-xl" />,
       color: "bg-[#0084FF]",
       url: `https://www.facebook.com/dialog/send?link=${encodeURIComponent(shareUrl)}&app_id=291494419107518&redirect_uri=${encodeURIComponent(shareUrl)}`,
     },
@@ -102,11 +97,11 @@ export default function ShareInvitation() {
           >
             {copied ? (
               <>
-                <FaCheck /> Đã sao chép link!
+                <IoCheckmark /> Đã sao chép link!
               </>
             ) : (
               <>
-                <FaLink /> Sao chép link thiệp cưới
+                <IoLink /> Sao chép link thiệp cưới
               </>
             )}
           </motion.button>

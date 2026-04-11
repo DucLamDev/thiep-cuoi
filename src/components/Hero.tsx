@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { FaHeart, FaChevronDown } from "react-icons/fa";
+import { IoHeart, IoChevronDown } from "react-icons/io5";
 import SparkleEffect from "./SparkleEffect";
 
 const WEDDING_DATE = new Date("2026-05-02T10:00:00+07:00");
@@ -129,9 +129,9 @@ export default function Hero({ guestName, relation }: HeroProps) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4, type: "spring" }}
         >
-          <div className="w-full h-full rounded-full border-4 border-white shadow-2xl overflow-hidden relative">
+          <div className="w-full h-full rounded-full border-4 border-white shadow-2xl overflow-hidden relative bg-gradient-to-br from-wedding-pink/20 to-white">
             <Image 
-              src="/images/gallery/anhcuoi/anh-cuoi-1.png" 
+              src="/images/anhcuoi/anh-co-dau-va-chu-re-ke-ben-nhau.jpg" 
               alt="Cô dâu & Chú rể Đình Quân & Hiền Na" 
               fill 
               className="object-cover" 
@@ -154,7 +154,7 @@ export default function Hero({ guestName, relation }: HeroProps) {
                 repeat: Infinity,
               }}
             >
-              <FaHeart className="text-sm" />
+              <IoHeart className="text-sm" />
             </motion.div>
           ))}
         </motion.div>
@@ -173,7 +173,7 @@ export default function Hero({ guestName, relation }: HeroProps) {
             transition={{ duration: 2, repeat: Infinity }}
             className="my-2"
           >
-            <FaHeart className="text-wedding-red text-2xl mx-auto" />
+            <IoHeart className="text-wedding-red text-2xl mx-auto" />
           </motion.div>
           <h1 className="font-playfair text-5xl md:text-7xl text-wedding-red">
             Hiền Na
@@ -231,7 +231,7 @@ export default function Hero({ guestName, relation }: HeroProps) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <FaHeart className="text-sm" />
+          <IoHeart className="text-sm" />
           Xem thiệp cưới
         </motion.button>
 
@@ -241,7 +241,7 @@ export default function Hero({ guestName, relation }: HeroProps) {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <FaChevronDown className="text-wedding-red/50 text-xl" />
+          <IoChevronDown className="text-wedding-red/50 text-xl" />
         </motion.div>
       </div>
     </section>

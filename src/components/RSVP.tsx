@@ -2,8 +2,9 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { FaHeart, FaCheck, FaUser, FaPhone } from "react-icons/fa";
+import { IoHeart, IoPerson, IoCall } from "react-icons/io5";
+import Image from "next/image";
+import emailjs from "@emailjs/browser";
 import ScrollAnimation from "./ScrollAnimation";
 import SectionDivider from "./SectionDivider";
 
@@ -98,8 +99,6 @@ function SadOverlay() {
 }
 
 export default function RSVP() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -118,36 +117,26 @@ export default function RSVP() {
 
     try {
       setIsSubmitting(true);
-      const res = await fetch("/api/rsvp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          pageUrl: typeof window !== "undefined" ? window.location.href : "",
-        }),
-      });
 
-      if (!res.ok) {
-        setSubmitError("Gửi thất bại. Vui lòng thử lại.");
-        return;
-      }
+      // Gửi email qua EmailJS
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID",
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID",
+        {
+          from_name: formData.name,
+          phone: formData.phone,
+          attending: formData.attending === "yes" ? "Sẽ tham dự" : "Không thể đến",
+          message: formData.message || "(Không có lời nhắn)",
+          page_url: typeof window !== "undefined" ? window.location.href : "",
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY"
+      );
 
       const fx: SubmitFx = formData.attending === "yes" ? "yes" : "no";
       setSubmitFx(fx);
       setIsSubmitted(true);
-
-      const relation = searchParams.get("relation") || "";
-      const target = `/rsvp-card?name=${encodeURIComponent(
-        formData.name.trim()
-      )}&relation=${encodeURIComponent(relation)}&attending=${encodeURIComponent(
-        formData.attending
-      )}`;
-
-      window.setTimeout(() => {
-        router.push(target);
-      }, fx === "yes" ? 1200 : 1400);
     } catch {
-      setSubmitError("Không thể kết nối. Vui lòng thử lại.");
+      setSubmitError("Gửi thất bại. Vui lòng thử lại.");
     } finally {
       setIsSubmitting(false);
     }
@@ -187,7 +176,7 @@ export default function RSVP() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Name */}
                 <div className="relative">
-                  <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-wedding-red/50 text-sm" />
+                  <IoPerson className="absolute left-4 top-1/2 -translate-y-1/2 text-wedding-red/50 text-sm" />
                   <input
                     type="text"
                     placeholder="Họ và tên"
@@ -202,7 +191,7 @@ export default function RSVP() {
 
                 {/* Phone */}
                 <div className="relative">
-                  <FaPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-wedding-red/50 text-sm" />
+                  <IoCall className="absolute left-4 top-1/2 -translate-y-1/2 text-wedding-red/50 text-sm" />
                   <input
                     type="tel"
                     placeholder="Số điện thoại"
@@ -221,10 +210,10 @@ export default function RSVP() {
                     Bạn có tham dự không?
                   </p>
                   <div className="grid grid-cols-2 gap-3">
-                      {[
-                        { value: "yes" as const, label: "Sẽ tham dự", icon: "🎉" },
-                        { value: "no" as const, label: "Không thể đến", icon: "😢" },
-                      ].map((option) => (
+                    {[
+                      { value: "yes" as const, label: "Sẽ tham dự", icon: "🎉" },
+                      { value: "no" as const, label: "Không thể đến", icon: "😢" },
+                    ].map((option) => (
                       <motion.button
                         key={option.value}
                         type="button"
@@ -266,7 +255,7 @@ export default function RSVP() {
                   whileTap={{ scale: 0.98 }}
                   disabled={!formData.name || !formData.phone || !formData.attending}
                 >
-                  <FaHeart className="text-sm" />
+                  <IoHeart className="text-sm" />
                   {isSubmitting ? "Đang gửi..." : "Gửi xác nhận"}
                 </motion.button>
 
@@ -280,25 +269,31 @@ export default function RSVP() {
           ) : (
             <motion.div
               key="success"
-              className="wedding-card text-center py-12"
+              className="text-center"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring" }}
             >
-              <motion.div
-                className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring" }}
-              >
-                <FaCheck className="text-green-500 text-3xl" />
-              </motion.div>
-              <h3 className="font-playfair text-2xl text-wedding-red mb-3">
+              <h3 className="font-playfair text-2xl text-wedding-red mb-4">
                 Cảm ơn bạn!
               </h3>
-              <p className="text-gray-500 text-sm max-w-xs mx-auto">
+              <p className="text-gray-500 text-sm max-w-xs mx-auto mb-6">
                 Chúng tôi đã nhận được phản hồi của bạn. Cảm ơn bạn rất nhiều!
               </p>
+              <motion.div
+                className="relative w-full max-w-sm mx-auto rounded-2xl overflow-hidden shadow-2xl"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, type: "spring" }}
+              >
+                <Image
+                  src="/images/anh-thiep-cuoi/ec05d0fb-24f5-41df-86dc-84116b1ab9f2.jfif"
+                  alt="Thiệp cưới Đình Quân & Hiền Na"
+                  width={600}
+                  height={900}
+                  className="w-full h-auto object-contain rounded-2xl"
+                />
+              </motion.div>
               <motion.div
                 className="mt-6 text-4xl"
                 animate={{ scale: [1, 1.2, 1] }}

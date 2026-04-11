@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaHeart } from "react-icons/fa";
+import { IoHeart } from "react-icons/io5";
 import ScrollAnimation from "./ScrollAnimation";
 import SectionDivider from "./SectionDivider";
 
@@ -28,6 +28,12 @@ export default function ParentsInfo() {
             </div>
             <div className="space-y-2 text-center">
               <p className="text-gray-700 font-medium">
+                Ông: Lê Tiến Phong
+              </p>
+              <p className="text-gray-700 font-medium">
+                Bà: Nguyễn Thị Ngọc Phú
+              </p>
+              <p className="text-gray-700 font-medium">
                 Chú rể: Lê Đình Quân (Út Nam)
               </p>
               <p className="text-gray-500 text-sm">
@@ -44,7 +50,7 @@ export default function ParentsInfo() {
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <FaHeart className="text-wedding-red text-2xl" />
+              <IoHeart className="text-wedding-red text-2xl" />
             </motion.div>
           </div>
         </ScrollAnimation>

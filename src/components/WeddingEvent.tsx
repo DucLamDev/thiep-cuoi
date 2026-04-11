@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from "react-icons/fa";
+import { IoLocationSharp, IoTime, IoCalendar } from "react-icons/io5";
 import ScrollAnimation from "./ScrollAnimation";
 import SectionDivider from "./SectionDivider";
 
@@ -69,15 +69,15 @@ export default function WeddingEvent() {
 
                 <div className="space-y-3 ml-1">
                   <div className="flex items-center gap-3 text-gray-600">
-                    <FaCalendarAlt className="text-wedding-red text-sm flex-shrink-0" />
+                    <IoCalendar className="text-wedding-red text-sm flex-shrink-0" />
                     <span className="text-sm">{event.date}</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-600">
-                    <FaClock className="text-wedding-red text-sm flex-shrink-0" />
+                    <IoTime className="text-wedding-red text-sm flex-shrink-0" />
                     <span className="text-sm">{event.time}</span>
                   </div>
                   <div className="flex items-start gap-3 text-gray-600">
-                    <FaMapMarkerAlt className="text-wedding-red text-sm flex-shrink-0 mt-0.5" />
+                    <IoLocationSharp className="text-wedding-red text-sm flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="text-sm font-medium">{event.venue}</p>
                       <p className="text-xs text-gray-400">{event.address}</p>
@@ -91,7 +91,7 @@ export default function WeddingEvent() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 mt-4 text-sm text-wedding-red hover:text-wedding-red-dark transition-colors font-medium"
                 >
-                  <FaMapMarkerAlt className="text-xs" />
+                  <IoLocationSharp className="text-xs" />
                   Xem bản đồ
                 </a>
               </div>
@@ -104,14 +104,14 @@ export default function WeddingEvent() {
       <ScrollAnimation className="w-full max-w-lg mx-auto mt-8">
         <div className="wedding-card p-2">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4!2d106.7!3d10.78!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ2JzQ4LjAiTiAxMDbCsDQyJzAwLjAiRQ!5e0!3m2!1svi!2svn!4v1"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Th%C3%B4n+V%C4%A9nh+Th%E1%BA%A1nh%2C+X%C3%A3+H%C3%B2a+Tr%C3%AD%2C+T%E1%BB%89nh+Kh%C3%A1nh+H%C3%B2a&language=vi"
             width="100%"
             height="250"
             style={{ border: 0, borderRadius: "12px" }}
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Wedding venue map"
+            title="Thôn Vĩnh Thạnh, Xã Hòa Trí, Tỉnh Khánh Hòa"
           />
         </div>
       </ScrollAnimation>

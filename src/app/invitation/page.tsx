@@ -16,6 +16,7 @@ const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"));
 const WeddingEvent = dynamic(() => import("@/components/WeddingEvent"));
 const VideoSection = dynamic(() => import("@/components/VideoSection"));
 const RSVP = dynamic(() => import("@/components/RSVP"));
+const PhotoShowcase = dynamic(() => import("@/components/PhotoShowcase"));
 const ShareInvitation = dynamic(() => import("@/components/ShareInvitation"));
 
 function InvitationContent() {
@@ -45,6 +46,7 @@ function InvitationContent() {
           <PhotoGallery />
           <WeddingEvent />
           <VideoSection />
+          <PhotoShowcase />
           <RSVP />
           <ShareInvitation />
         </main>

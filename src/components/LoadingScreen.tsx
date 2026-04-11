@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { FaHeart } from "react-icons/fa";
+import { IoHeart } from "react-icons/io5";
 
 export default function LoadingScreen({
   onComplete,
@@ -57,7 +57,7 @@ export default function LoadingScreen({
             transition={{ duration: 1.5, repeat: Infinity }}
             className="mb-6"
           >
-            <FaHeart className="text-wedding-red text-5xl md:text-6xl" />
+            <IoHeart className="text-wedding-red text-4xl md:text-6xl" />
           </motion.div>
 
           <motion.h1

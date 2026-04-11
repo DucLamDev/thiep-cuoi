@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-import { FaHeart } from "react-icons/fa";
+import { IoMusicalNotes, IoPlay, IoPause } from "react-icons/io5";
 
 const MUSIC_SRC = "/music/paulyudin-wedding-485932.mp3";
 const STORAGE_KEY = "wedding_bgm_enabled";
@@ -110,12 +110,8 @@ export default function MusicPlayer() {
             : {}
         }
       >
-        <FaHeart
-          className={`text-white text-lg transition-opacity ${
-            isPlaying ? "opacity-100" : "opacity-50"
-          }`}
-        />
-
+        <IoMusicalNotes className="text-xs" />
+        {isPlaying ? <IoPause /> : <IoPlay />}
         {/* Sound wave animation */}
         {isPlaying && (
           <div className="absolute -top-1 -right-1">
