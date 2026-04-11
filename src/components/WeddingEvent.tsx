@@ -7,31 +7,24 @@ import SectionDivider from "./SectionDivider";
 
 const events = [
   {
-    title: "Lễ Vu Quy",
-    date: "02 Tháng 05, 2026",
-    time: "08:00 - 10:00",
-    venue: "Tư gia nhà gái",
-    address: "Thôn Vĩnh Thạnh, Xã Hoà Trí, Ninh Hoà, Khánh Hoà",
-    mapUrl: "https://maps.google.com/?q=Vĩnh+Thạnh+Hoà+Trí+Ninh+Hoà+Khánh+Hòa",
-    icon: "🏠",
-  },
-  {
     title: "Lễ Thành Hôn",
-    date: "02 Tháng 05, 2026",
-    time: "11:00 - 13:00",
-    venue: "Tư gia nhà trai",
-    address: "Thôn Vĩnh Thạnh, Xã Hoà Trí, Ninh Hoà, Khánh Hoà",
-    mapUrl: "https://maps.google.com/?q=Vĩnh+Thạnh+Hoà+Trí+Ninh+Hoà+Khánh+Hòa",
+    date: "Thứ Bảy, 02 Tháng 05, 2026",
+    time: "10:00",
+    venue: "Tư Gia",
+    address: "Thôn Vĩnh Thạnh, Xã Hòa Trí",
+    mapUrl: "https://maps.google.com/?q=Vĩnh+Thạnh+Hoà+Trí+Khánh+Hòa",
     icon: "💒",
+    note: "Nhâm Ngày 16 Tháng 03 Năm Bính Ngọ",
   },
   {
     title: "Tiệc Cưới",
-    date: "02 Tháng 05, 2026",
-    time: "17:30 - 21:00",
-    venue: "Nhà hàng tiệc cưới",
-    address: "Thôn Vĩnh Thạnh, Xã Hoà Trí, Ninh Hoà, Khánh Hoà",
-    mapUrl: "https://maps.google.com/?q=Vĩnh+Thạnh+Hoà+Trí+Ninh+Hoà+Khánh+Hòa",
+    date: "Thứ Bảy, 02 Tháng 05, 2026",
+    time: "10:00",
+    venue: "Tư Gia",
+    address: "Thôn Vĩnh Thạnh, Xã Hòa Trí",
+    mapUrl: "https://maps.google.com/?q=Vĩnh+Thạnh+Hoà+Trí+Khánh+Hòa",
     icon: "🎉",
+    note: "Nhâm Ngày 16 Tháng 03 Năm Bính Ngọ",
   },
 ];
 
@@ -70,11 +63,14 @@ export default function WeddingEvent() {
                 <div className="space-y-3 ml-1">
                   <div className="flex items-center gap-3 text-gray-600">
                     <IoCalendar className="text-wedding-red text-sm flex-shrink-0" />
-                    <span className="text-sm">{event.date}</span>
+                    <div>
+                      <span className="text-sm block">{event.date}</span>
+                      <span className="text-xs text-gray-400 italic">{event.note}</span>
+                    </div>
                   </div>
                   <div className="flex items-center gap-3 text-gray-600">
                     <IoTime className="text-wedding-red text-sm flex-shrink-0" />
-                    <span className="text-sm">{event.time}</span>
+                    <span className="text-sm">Vào lúc {event.time}</span>
                   </div>
                   <div className="flex items-start gap-3 text-gray-600">
                     <IoLocationSharp className="text-wedding-red text-sm flex-shrink-0 mt-0.5" />
