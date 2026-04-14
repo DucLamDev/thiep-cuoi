@@ -52,7 +52,7 @@ export default function VideoSection() {
           <div className="relative w-full" style={{ paddingBottom: '177.78%' }}>
             <video
               ref={videoRef}
-              src="/video/0412.mp4"
+              src="/video/0411 (1)(1).mp4"
               className="absolute inset-0 w-full h-full object-cover"
               playsInline
               preload="metadata"
