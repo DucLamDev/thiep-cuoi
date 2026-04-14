@@ -120,8 +120,8 @@ export default function RSVP() {
 
       // Gửi email qua EmailJS
       await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_j1alcii",
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_0lelbm7",
+        "service_j1alcii",
+        "template_0lelbm7",
         {
           from_name: formData.name,
           phone: formData.phone,
@@ -129,14 +129,16 @@ export default function RSVP() {
           message: formData.message || "(Không có lời nhắn)",
           page_url: typeof window !== "undefined" ? window.location.href : "",
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "KM3Pben6KGoyNgVH9"
+        "KM3Pben6KGoyNgVH9"
       );
 
       const fx: SubmitFx = formData.attending === "yes" ? "yes" : "no";
       setSubmitFx(fx);
       setIsSubmitted(true);
-    } catch {
-      setSubmitError("Gửi thất bại. Vui lòng thử lại.");
+    } catch (error: any) {
+      console.error("EmailJS Error:", error);
+      const errorMessage = error?.text || error?.message || "Gửi thất bại. Vui lòng thử lại.";
+      setSubmitError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
