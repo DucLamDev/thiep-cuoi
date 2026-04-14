@@ -287,7 +287,7 @@ export default function RSVP() {
                 transition={{ delay: 0.3, type: "spring" }}
               >
                 <Image
-                  src="/images/anh-thiep-cuoi/ec05d0fb-24f5-41df-86dc-84116b1ab9f2.jfif"
+                  src="/images/anh-thiep-cuoi/ec05d0fb-24f5-41df-86dc-84116b1ab9f2.jpg"
                   alt="Thiệp cưới Đình Quân & Hiền Na"
                   width={600}
                   height={900}
