@@ -120,8 +120,8 @@ export default function RSVP() {
 
       // Gửi email qua EmailJS
       await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID",
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID",
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_j1alcii",
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_0lelbm7",
         {
           from_name: formData.name,
           phone: formData.phone,
@@ -129,7 +129,7 @@ export default function RSVP() {
           message: formData.message || "(Không có lời nhắn)",
           page_url: typeof window !== "undefined" ? window.location.href : "",
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY"
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "KM3Pben6KGoyNgVH9"
       );
 
       const fx: SubmitFx = formData.attending === "yes" ? "yes" : "no";
