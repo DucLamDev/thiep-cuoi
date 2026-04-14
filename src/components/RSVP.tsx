@@ -135,9 +135,10 @@ export default function RSVP() {
       const fx: SubmitFx = formData.attending === "yes" ? "yes" : "no";
       setSubmitFx(fx);
       setIsSubmitted(true);
-    } catch (error: any) {
+    } catch (error) {
       console.error("EmailJS Error:", error);
-      const errorMessage = error?.text || error?.message || "Gửi thất bại. Vui lòng thử lại.";
+      const err = error as { text?: string; message?: string };
+      const errorMessage = err?.text || err?.message || "Gửi thất bại. Vui lòng thử lại.";
       setSubmitError(errorMessage);
     } finally {
       setIsSubmitting(false);
